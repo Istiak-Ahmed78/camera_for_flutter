@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,12 @@ class _CameraScreenState extends State<_CameraScreen> {
   late CameraController _cameraController;
   late Future<void> _initializeControllerFuture;
   late List<CameraDescription> _availableCameras;
-
   late CameraDescription currentUsingCamera;
   final Color _buttonColor = const Color.fromRGBO(52, 52, 52, 0.5);
   final Color _buttonIconColor = const Color.fromRGBO(250, 249, 246, 1);
 
   XFile? file;
+  bool isInitializingForFirstTime = true;
   bool get isFileSelected => file != null;
 
   @override
@@ -40,7 +41,6 @@ class _CameraScreenState extends State<_CameraScreen> {
     currentUsingCamera = widget.cameraToCapture ?? _availableCameras.first;
     _cameraController =
         CameraController(currentUsingCamera, ResolutionPreset.high);
-
     _initializeCamera();
     super.initState();
   }
@@ -49,6 +49,13 @@ class _CameraScreenState extends State<_CameraScreen> {
   void dispose() {
     _cameraController.dispose();
     super.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(FlagProperty('_isInitialized', value: isInitializingForFirstTime));
   }
 
   void _getAvailableCameras() async {
@@ -132,6 +139,7 @@ class _CameraScreenState extends State<_CameraScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(isInitializingForFirstTime);
     Widget photoWidget = CameraPreview(_cameraController);
     if (isFileSelected) {
       photoWidget = Container(
@@ -200,11 +208,7 @@ class _CameraScreenState extends State<_CameraScreen> {
           } else if (sn.hasError) {
             child = Center(child: Text(sn.error.toString()));
           } else {
-            child = const Center(
-                child: Text(
-              "Please wait. Camera is being ready",
-              style: TextStyle(color: Colors.white),
-            ));
+            child = const SizedBox();
           }
           return child;
         },
