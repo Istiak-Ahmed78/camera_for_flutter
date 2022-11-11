@@ -4,8 +4,8 @@ import 'package:image/image.dart' as img;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-Future<XFile?> openCamera(
-    BuildContext context, CameraDescription cameraToOpen) async {
+Future<XFile?> openCamera(BuildContext context,
+    [CameraDescription? cameraToOpen]) async {
   XFile? rawFile = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -32,7 +32,7 @@ class _CameraScreenState extends State<_CameraScreen> {
   final Color _buttonIconColor = const Color.fromRGBO(250, 249, 246, 1);
 
   XFile? file;
-  bool isInitializingForFirstTime = true;
+
   bool get isFileSelected => file != null;
 
   @override
@@ -49,13 +49,6 @@ class _CameraScreenState extends State<_CameraScreen> {
   void dispose() {
     _cameraController.dispose();
     super.dispose();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-        .add(FlagProperty('_isInitialized', value: isInitializingForFirstTime));
   }
 
   void _getAvailableCameras() async {
@@ -139,7 +132,6 @@ class _CameraScreenState extends State<_CameraScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(isInitializingForFirstTime);
     Widget photoWidget = CameraPreview(_cameraController);
     if (isFileSelected) {
       photoWidget = Container(
@@ -169,6 +161,7 @@ class _CameraScreenState extends State<_CameraScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         FloatingActionButton(
+                          heroTag: "closeButton",
                           backgroundColor: _buttonColor,
                           elevation: 0,
                           onPressed: triggerCloseButton,
@@ -178,6 +171,7 @@ class _CameraScreenState extends State<_CameraScreen> {
                           ),
                         ),
                         FloatingActionButton(
+                          heroTag: "captureButton",
                           backgroundColor: _buttonColor,
                           elevation: 0,
                           onPressed: triggerCaptureImageButton,
@@ -187,6 +181,7 @@ class _CameraScreenState extends State<_CameraScreen> {
                           ),
                         ),
                         FloatingActionButton(
+                          heroTag: "rotateButton",
                           backgroundColor: isFileSelected
                               ? _buttonColor.withOpacity(0.3)
                               : _buttonColor,
