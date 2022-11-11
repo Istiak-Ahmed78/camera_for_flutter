@@ -3,8 +3,8 @@ import 'package:image/image.dart' as img;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-Future<XFile?> openCamera(BuildContext context,
-    [CameraDescription? cameraToOpen]) async {
+Future<XFile?> openCamera(
+    BuildContext context, CameraDescription cameraToOpen) async {
   XFile? rawFile = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -19,10 +19,10 @@ class _CameraScreen extends StatefulWidget {
   const _CameraScreen({super.key, this.cameraToCapture});
 
   @override
-  State<_CameraScreen> createState() => __CameraScreenState();
+  State<_CameraScreen> createState() => _CameraScreenState();
 }
 
-class __CameraScreenState extends State<_CameraScreen> {
+class _CameraScreenState extends State<_CameraScreen> {
   late CameraController _cameraController;
   late Future<void> _initializeControllerFuture;
   late List<CameraDescription> _availableCameras;
