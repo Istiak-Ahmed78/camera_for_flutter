@@ -8,7 +8,7 @@ A package for taking a photo by camera.
 
 ## Installation
 #### Add dependency
-Open  your `pubspec.yaml` file add the dependencies link this way.
+Open  your `pubspec.yaml` file add the dependencies like this way.
 ```yaml
 dependencies:
 
