@@ -64,7 +64,7 @@ class _CameraForFlutterExampleScreenState
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-          /// Opens camera. returns a [XFile] after taking a photo
+          /// Opens a camera. returns a [XFile] after taking a photo
             XFile? pickedFile =
                 await openCamera(context, _availableCameraList.first);
           },
