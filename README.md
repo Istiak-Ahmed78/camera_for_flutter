@@ -18,7 +18,7 @@ dependencies:
       url: https://github.com/Istiak-Ahmed78/camera_for_flutter.git
 ```
 #### Change `minSDK` version
-Nagivate to the file `YOUR PROJECT/android/app/build.gradel` and `minSdkVersion` and change it to `21`
+Navigate to the file `YOUR PROJECT/android/app/build.gradle` and `minSdkVersion` and change it to `21`
 ```groovy
 minSdkVersion 21
 ```
