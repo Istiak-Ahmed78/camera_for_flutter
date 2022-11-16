@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 ///[openCamera] is to launch phone camera to take photo.
 ///pass [cameraToOpen] to open on launching.
 Future<XFile?> openCamera(BuildContext context,
-    [CameraDescription? cameraToOpen,
-    ResolutionPreset? cameraResolution]) async {
+    {CameraDescription? cameraToOpen,
+    ResolutionPreset? cameraResolution}) async {
   XFile? rawFile = await Navigator.push(
       context,
       MaterialPageRoute(
