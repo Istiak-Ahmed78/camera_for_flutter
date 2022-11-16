@@ -24,7 +24,7 @@ minSdkVersion 21
 ```
 
 #### Run `Get packages`
-Open your terminal and run `pub get` the get the package
+Open your terminal and run `pub get` to get the package
 ## How to use
 #### Import the package
 ```dart
