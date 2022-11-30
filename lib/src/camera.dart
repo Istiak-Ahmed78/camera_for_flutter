@@ -138,10 +138,10 @@ class _CameraScreenState extends State<_CameraScreen> {
     return XFile(fixedFile.path);
   }
 
-  void triggerCloseButton() {
-    ///If pressed after taking photo.
-    ///Clears current taking photo.
-    ///Otherwise, closes the camera.
+  ///If pressed after taking photo.
+  ///Clears current taking photo.
+  ///Otherwise, closes the camera.
+  void _triggerCloseButton() {
     if (isFileSelected) {
       file = null;
       setState(() {});
@@ -150,7 +150,8 @@ class _CameraScreenState extends State<_CameraScreen> {
     }
   }
 
-  void triggerCaptureImageButton() {
+  ///Command to capture image
+  void _triggerCaptureImageButton() {
     if (isFileSelected) {
       Navigator.pop(context, file);
     } else {
@@ -196,7 +197,7 @@ class _CameraScreenState extends State<_CameraScreen> {
                           heroTag: "closeButton",
                           backgroundColor: _buttonColor,
                           elevation: 0,
-                          onPressed: triggerCloseButton,
+                          onPressed: _triggerCloseButton,
                           child: Icon(
                             Icons.close,
                             color: _buttonIconColor,
@@ -206,7 +207,7 @@ class _CameraScreenState extends State<_CameraScreen> {
                           heroTag: "captureButton",
                           backgroundColor: _buttonColor,
                           elevation: 0,
-                          onPressed: triggerCaptureImageButton,
+                          onPressed: _triggerCaptureImageButton,
                           child: Icon(
                             isFileSelected ? Icons.check : Icons.camera,
                             color: _buttonIconColor,
