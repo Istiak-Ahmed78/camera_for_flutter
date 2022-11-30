@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 ///[openCamera] is to launch phone camera to take photo.
 ///pass [cameraToOpen] to open on launching.
 Future<XFile?> openCamera(BuildContext context,
-    [CameraDescription? cameraToOpen]) async {
+    {CameraDescription? cameraToOpen,
+    ResolutionPreset? cameraResolution}) async {
   XFile? rawFile = await Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => _CameraScreen(
                 cameraToCapture: cameraToOpen,
+                cameraResolution: cameraResolution,
               )));
   return rawFile;
 }
@@ -20,7 +22,8 @@ class _CameraScreen extends StatefulWidget {
   /// The camera to open. if [cameraToCapture] is not given. back camera will open on launching
   /// as default.
   final CameraDescription? cameraToCapture;
-  const _CameraScreen({super.key, this.cameraToCapture});
+  final ResolutionPreset? cameraResolution;
+  const _CameraScreen({super.key, this.cameraToCapture, this.cameraResolution});
 
   @override
   State<_CameraScreen> createState() => _CameraScreenState();
@@ -53,8 +56,8 @@ class _CameraScreenState extends State<_CameraScreen> {
     currentUsingCamera = widget.cameraToCapture ?? _availableCameras.first;
 
     ///Initializing camera [_cameraController]
-    _cameraController =
-        CameraController(currentUsingCamera, ResolutionPreset.high);
+    _cameraController = CameraController(
+        currentUsingCamera, widget.cameraResolution ?? ResolutionPreset.low);
     _initializeCamera();
     super.initState();
   }
@@ -135,10 +138,10 @@ class _CameraScreenState extends State<_CameraScreen> {
     return XFile(fixedFile.path);
   }
 
-  void triggerCloseButton() {
-    ///If pressed after taking photo.
-    ///Clears current taking photo.
-    ///Otherwise, closes the camera.
+  ///If pressed after taking photo.
+  ///Clears current taking photo.
+  ///Otherwise, closes the camera.
+  void _triggerCloseButton() {
     if (isFileSelected) {
       file = null;
       setState(() {});
@@ -147,7 +150,8 @@ class _CameraScreenState extends State<_CameraScreen> {
     }
   }
 
-  void triggerCaptureImageButton() {
+  ///Command to capture image
+  void _triggerCaptureImageButton() {
     if (isFileSelected) {
       Navigator.pop(context, file);
     } else {
@@ -193,7 +197,7 @@ class _CameraScreenState extends State<_CameraScreen> {
                           heroTag: "closeButton",
                           backgroundColor: _buttonColor,
                           elevation: 0,
-                          onPressed: triggerCloseButton,
+                          onPressed: _triggerCloseButton,
                           child: Icon(
                             Icons.close,
                             color: _buttonIconColor,
@@ -203,7 +207,7 @@ class _CameraScreenState extends State<_CameraScreen> {
                           heroTag: "captureButton",
                           backgroundColor: _buttonColor,
                           elevation: 0,
-                          onPressed: triggerCaptureImageButton,
+                          onPressed: _triggerCaptureImageButton,
                           child: Icon(
                             isFileSelected ? Icons.check : Icons.camera,
                             color: _buttonIconColor,

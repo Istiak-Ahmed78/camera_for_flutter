@@ -34,6 +34,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   File? _file;
+  double? get _imageSize =>
+      _file == null ? null : (_file!.lengthSync().toDouble() / (1024));
   List<CameraDescription> cameras = [];
   @override
   void initState() {
@@ -53,18 +55,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (_file != null)
+            if (_file != null) ...[
+              Text("Image size: $_imageSize"),
               Container(
                 height: 500,
                 width: 300,
                 decoration: BoxDecoration(
                     image: DecorationImage(image: FileImage(_file!))),
               ),
+            ],
             ElevatedButton(
                 onPressed: () async {
-                  XFile? pickedFile = await openCamera(context, cameras.first);
-                  if (pickedFile != null) {
-                    _file = File(pickedFile.path);
+                  XFile? capturedImageXFile = await openCamera(context,
+                      cameraResolution: ResolutionPreset.high,
+                      cameraToOpen: cameras.first);
+                  if (capturedImageXFile != null) {
+                    _file = File(capturedImageXFile.path);
                     setState(() {});
                   }
                 },
