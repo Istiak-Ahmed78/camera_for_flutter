@@ -6,7 +6,22 @@ A package for taking a photo by camera.
 
 * Capture photo
 
+## Screenshots
+
+<table align="center" style="border:1px solid black;">
+  <tr>
+    <th style="text-align: center">Inital Screen</th>
+     <th style="text-align: center">After taking photo</th>
+  </tr>
+  <tr>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/68919043/204817622-00538960-73d1-4696-ab41-a525cd9705a5.jpg" width="260" height="560" ></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/68919043/204817662-61495d0c-cb5c-4440-9e9d-1b8b85e14114.jpg" width="260" height="560" ></td>
+  </tr>
+ </table>
+ 
+
 ## Installation
+
 #### Add dependency
 Open  your `pubspec.yaml` file add the dependencies like this way.
 ```yaml
