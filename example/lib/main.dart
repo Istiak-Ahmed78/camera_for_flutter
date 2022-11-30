@@ -66,11 +66,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             ElevatedButton(
                 onPressed: () async {
-                  XFile? pickedFile = await openCamera(context,
+                  XFile? capturedImageXFile = await openCamera(context,
                       cameraResolution: ResolutionPreset.high,
                       cameraToOpen: cameras.first);
-                  if (pickedFile != null) {
-                    _file = File(pickedFile.path);
+                  if (capturedImageXFile != null) {
+                    _file = File(capturedImageXFile.path);
                     setState(() {});
                   }
                 },
