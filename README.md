@@ -91,4 +91,4 @@ class _CameraForFlutterExampleScreenState
 }
 
 ```
-(File an issue for any query or any issue. Contribution is welcomed)
+(Create issue for any query or any issue. Contribution is welcomed)
