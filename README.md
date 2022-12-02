@@ -10,7 +10,7 @@ A package for taking a photo by camera.
 
 <table align="center" style="border:1px solid black;">
   <tr>
-    <th style="text-align: center">Inital Screen</th>
+    <th style="text-align: center">initial Screen</th>
      <th style="text-align: center">After taking photo</th>
   </tr>
   <tr>
