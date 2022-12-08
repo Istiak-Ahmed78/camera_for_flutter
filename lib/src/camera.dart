@@ -170,7 +170,7 @@ class _CameraScreenState extends State<_CameraScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: FileImage(File(file!.path)), fit: BoxFit.fitWidth)),
+                image: FileImage(File(file!.path)), fit: BoxFit.cover)),
       );
     }
     return Scaffold(
